@@ -1,0 +1,5 @@
+package manager;
+
+public enum CommandsType {
+    ARTISTS, MUSEUM_GUIDE, ART_GALERY, SEE_ARTIST, SEE_MUSEUM, SEE_ARTWORK, LOGIN, REGISTER, MODIFY_USER, LOGOUT;
+}
