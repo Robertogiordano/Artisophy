@@ -15,8 +15,12 @@ public class UserModifyClass implements Command {
     }
 
     @Override
-    public List<Object> execute() throws SQLException {
+    public List<Object> execute() {
+        try {
             CommandInvoker.setUser(ConsultasBBDD.modifyUserBBDD(CommandInvoker.getUser(),newUser));
-            return Collections.singletonList(newUser);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return Collections.singletonList(newUser);
     }
 }

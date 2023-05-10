@@ -19,7 +19,7 @@ class ConsultaArtitsBBDD {
 	@Test
 	public void readAllArtistsTest() throws SQLException {
 		CRUDArtistsBBDD artistsBBDD=CRUDArtistsBBDD.getInstance();
-		artistsBBDD.read("1").stream().forEach(a -> System.out.println(a));
+		Assert.assertNotEquals(artistsBBDD.read("1").size(),0);
 	}
 	
 	@Test

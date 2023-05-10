@@ -3,6 +3,7 @@ package bbdd;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import dao.Artist;
@@ -18,6 +19,8 @@ class TestConnectionDB {
 	    public void getAllUsersTest() throws SQLException {
 	       List<User> users=ConsultasBBDD.getUsers();
 	       System.out.println(users);
+
+		   Assert.assertNotEquals(users.size(),0);
 	   }
 
 	   @Test
@@ -25,7 +28,7 @@ class TestConnectionDB {
 	       User user=new User("Roberto","Giordano", "rgiordano","rgiordano@al.uloyola.es","qwertyuiop");
 
 	       CRUDUserBBDD userBBDD=CRUDUserBBDD.getInstance();
-	       System.out.println(userBBDD.read(user.getUsername(), user.getPassword()));
+		   Assert.assertEquals(userBBDD.read(user.getUsername(), user.getPassword()),user);
 	   }
 
 	   @Test

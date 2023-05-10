@@ -26,7 +26,7 @@ class ConsultaArtWorkBBDD {
     @Test
     public void readAllArtworkTest() throws SQLException {
         CRUDArtworksBBDD artworksBBDD=CRUDArtworksBBDD.getInstance();
-        artworksBBDD.read("1").stream().forEach(a -> System.out.println(a));
+        Assert.assertNotEquals(artworksBBDD.read("1").size(),0);
     }
     
 	@Test

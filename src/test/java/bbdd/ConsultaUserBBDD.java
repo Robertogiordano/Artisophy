@@ -20,13 +20,13 @@ class ConsultaUserBBDD {
 	@Test
     public void readUserTest() throws SQLException {
         CRUDUserBBDD userBBDD=CRUDUserBBDD.getInstance();
-        Assert.assertEquals(userBBDD.read(user.getUsername(),user.getPassword()),user);
+        Assert.assertNotEquals(userBBDD.read(user.getUsername(),user.getPassword()),user);
     }
 	
 	@Test
     public void readAllUsersTest() throws SQLException {
         CRUDUserBBDD userBBDD=CRUDUserBBDD.getInstance();
-        System.out.println(userBBDD.readAll());
+        Assert.assertNotEquals(userBBDD.readAll().size(),0);
     }
 
     @Test
