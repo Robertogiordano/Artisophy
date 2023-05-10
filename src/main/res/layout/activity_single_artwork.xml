@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SingleArtworkActivity">
+
+    <ImageView
+        android:id="@+id/imgPathImageViewSingleArtwork"
+        android:layout_width="306dp"
+        android:layout_height="222dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextViewSingleArtwork"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/nameTextViewSingleArtwork"
+        android:layout_width="345dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/descriptionTextViewSingleArtwork"
+        android:layout_width="332dp"
+        android:layout_height="218dp"
+        android:layout_marginTop="124dp"
+        android:justificationMode="inter_word"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgPathImageViewSingleArtwork" />
+
+    <TextView
+        android:id="@+id/yearTextViewSingleArtwork"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="16dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/museumTextViewSingleArtwork"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/museumTextViewSingleArtwork"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="40dp"
+        android:text="TextView"
+        android:textStyle="italic"
+        android:textColor="#006CFF"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionTextViewSingleArtwork"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/authorTextViewSingleArtwork"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:layout_marginBottom="56dp"
+        android:gravity="right"
+        android:text="TextView"
+        android:textStyle="italic"
+        android:textColor="#006CFF"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionTextViewSingleArtwork"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/museumTextViewSingleArtwork" />
+
+
+
+
+    <Button
+        android:id="@+id/backButtonSingleArtwork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
