@@ -31,10 +31,10 @@ class GetSeeMuseumsTest {
 		new GetSeeMuseum().doPost(request, response);
 		System.out.println(stringWriter.toString());
 		
-		JSONObject objectResponse = new JSONObject(response);
+		JSONObject objectResponse = new JSONObject(stringWriter.toString());
 		String code = objectResponse.get("code").toString();
 		String resultado = objectResponse.get("resultado").toString();
-		assertEquals("ok", code);
+		assertEquals("Ok", code);
 		assertNotNull(resultado);
 	}
 }

@@ -1,3 +1,5 @@
+/*NEVER INVOCATED*/
+
 package services;
 
 import java.io.IOException;
@@ -51,9 +53,8 @@ public class FiltrarPorBirthYearArtists extends HttpServlet {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-	    	User user = new User("Laura", "", "", "", "135246");
 	    	String birth = request.getParameter("birthYear");
-		    CommandInvoker invoker = new CommandInvoker(user);
+		    CommandInvoker invoker = new CommandInvoker();
 		    
 		    List<ArtElement> artists = ConsultasBBDD.filterArtElementId(ArtElementType.ARTISTS, "birthYear= "+birth);
 		    
@@ -82,13 +83,27 @@ public class FiltrarPorBirthYearArtists extends HttpServlet {
 		    }
 		    
 		}catch(ClassNotFoundException e) {
-			PrintWriter out2 = response.getWriter();
-		    out2.println("Class not found fired");
-		    out2.println(e.toString());
+			JSONObject out = new JSONObject();
+			out.put("code", "ERROR");
+			out.put("mensaje", "Class not found fired" + e.toString());
+			out.put("resultado", new JSONArray());
+			PrintWriter writer = response.getWriter();
+			try {
+				writer.write(out.toString());
+			} finally {
+				writer.close();
+			}
 		}catch(SQLException e) {
-			PrintWriter out2 = response.getWriter();
-		    out2.println("SQL exception fired");
-		    out2.println(e.toString());
+			JSONObject out = new JSONObject();
+			out.put("code", "ERROR");
+			out.put("mesaje", "SQL exception fired" + e.toString());
+			out.put("resultado", new JSONArray());
+			PrintWriter writer = response.getWriter();
+			try {
+				writer.write(out.toString());
+			} finally {
+				writer.close();
+			}
 		}
 		    
 		

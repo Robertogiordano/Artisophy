@@ -31,7 +31,7 @@ class GetAllMuseumsServletTest {
 		new GetAllMuseumsServlet().doGet(request, response);
 		System.out.println(stringWriter.toString());
 		
-		JSONObject objectResponse = new JSONObject(response);
+		JSONObject objectResponse = new JSONObject(stringWriter.toString());
 		String code = objectResponse.get("code").toString();
 		String resultado = objectResponse.get("resultado").toString();
 		assertEquals("ok", code);

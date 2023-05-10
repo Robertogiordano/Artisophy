@@ -12,7 +12,7 @@ import java.util.List;
 class CRUDArtworksBBDD implements DAOInterface {
     private static CRUDArtworksBBDD instance;
 
-    private static ConnectionManager connection;
+    private ConnectionManager connection;
 
     private CRUDArtworksBBDD(){
         connection=new ConnectionManager();
@@ -21,7 +21,9 @@ class CRUDArtworksBBDD implements DAOInterface {
 
     public void closeConnection(){
         connection.closeConnection();
+        instance=null;
     }
+
     public static CRUDArtworksBBDD getInstance() {
         if(instance==null){
             instance=new CRUDArtworksBBDD();
@@ -49,7 +51,7 @@ class CRUDArtworksBBDD implements DAOInterface {
             stmt.setString(1, a.getImgPath());
             stmt.setString(2, a.getName());
             stmt.setInt(3, a.getYear());
-            stmt.setInt(4, a.getAutor_id());
+            stmt.setInt(4, a.getAuthor_id());
             stmt.setInt(5, a.getMuseum_id());
             stmt.setString(6, a.getDescription());
             stmt.setString(7, a.getWiki());
@@ -83,7 +85,7 @@ class CRUDArtworksBBDD implements DAOInterface {
             throw new RuntimeException();
         }
 
-        System.out.println("Id è "+a.getAutor_id());
+        System.out.println("Id è "+a.getAuthor_id());
 
         String query = "UPDATE Artwork SET id=?, imgPath=?, name=?, year=?, autor_id=?, museum_id=?, description=?, wiki=? WHERE "+condition;
         try (PreparedStatement stmt = connection.conn.prepareStatement(query)) {
@@ -91,7 +93,7 @@ class CRUDArtworksBBDD implements DAOInterface {
             stmt.setString(2, a.getImgPath());
             stmt.setString(3, a.getName());
             stmt.setInt(4, a.getYear());
-            stmt.setInt(5, a.getAutor_id());
+            stmt.setInt(5, a.getAuthor_id());
             stmt.setInt(6, a.getMuseum_id());
             stmt.setString(7, a.getDescription());
             stmt.setString(8, a.getWiki());
@@ -112,16 +114,9 @@ class CRUDArtworksBBDD implements DAOInterface {
             throw new RuntimeException();
         }
 
-        String query = "DELETE FROM Artwork WHERE id=? and imgPath=? and name=? and year=? and autor_id=? and museum_id=? and description=? and wiki=?";
+        String query = "DELETE FROM Artwork WHERE id=?";
         try (PreparedStatement stmt = connection.conn.prepareStatement(query)) {
             stmt.setInt(1, a.getId());
-            stmt.setString(2, a.getImgPath());
-            stmt.setString(3, a.getName());
-            stmt.setInt(4, a.getYear());
-            stmt.setInt(5, a.getAutor_id());
-            stmt.setInt(6, a.getMuseum_id());
-            stmt.setString(7, a.getDescription());
-            stmt.setString(8, a.getWiki());
 
             stmt.execute();
         } catch (Exception e) {

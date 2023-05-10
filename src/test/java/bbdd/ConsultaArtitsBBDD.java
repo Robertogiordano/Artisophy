@@ -13,7 +13,7 @@ class ConsultaArtitsBBDD {
 	
 	@BeforeEach
 	public void crearArtist() {
-		artist = new Artist(0,"Pablo Picasso",1881,1973,"Pablo Ruiz y Picasso, simply known as Pablo Picasso, was a Spanish painter, sculptor and lithographer, among the most influential of the 20th century","https://en.wikipedia.org/wiki/Pablo_Picasso");
+		artist = new Artist(0,"Pablo Picasso","Pablo","Picasso",1881,1973,"Pablo Ruiz y Picasso, simply known as Pablo Picasso, was a Spanish painter, sculptor and lithographer, among the most influential of the 20th century","https://en.wikipedia.org/wiki/Pablo_Picasso");
 	}
 
 	@Test

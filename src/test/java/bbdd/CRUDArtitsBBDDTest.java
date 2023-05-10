@@ -15,8 +15,8 @@ class CRUDArtitsBBDDTest {
 	
 	@BeforeEach
 	public void crearArtist() {
-		artist = new Artist(3, "Leonardo da Vinci",1853,1890,"Leonardo da Vinci (Leonardo di ser Piero da Vinci) Loudspeaker.svg escuchar (Vinci, 15 de abril de 14522​-Amboise, 2 de mayo de 1519) fue un polímata florentino del Renacimiento italiano. Fue a la vez pintor, anatomista, arquitecto, paleontólogo,3​ botánico, escritor, escultor, filósofo, ingeniero, inventor, músico, poeta y urbanista.","https://en.wikipedia.org/wiki/Leonardo da Vinci");
-		upArtist = new Artist(3, "Leonardo da Vinci",1853,1890,"Leonardo da Vinci (Leonardo di ser Piero da Vinci) Loudspeaker.svg escuchar (Vinci, 15 de abril de 14522​-Amboise, 2 de mayo de 1519) fue un polímata florentino del Renacimiento italiano. Fue a la vez pintor, anatomista, arquitecto, paleontólogo,3​ botánico, escritor, escultor, filósofo, ingeniero, inventor, músico, poeta y urbanista.","https://en.wikipedia.org/wiki/Leonardo da Vinci");
+		artist = new Artist(3, "Leonardo da Vinci","Leonardo","Da Vinci",1853,1890,"Leonardo da Vinci (Leonardo di ser Piero da Vinci) Loudspeaker.svg escuchar (Vinci, 15 de abril de 14522​-Amboise, 2 de mayo de 1519) fue un polímata florentino del Renacimiento italiano. Fue a la vez pintor, anatomista, arquitecto, paleontólogo,3​ botánico, escritor, escultor, filósofo, ingeniero, inventor, músico, poeta y urbanista.","https://en.wikipedia.org/wiki/Leonardo da Vinci");
+		upArtist = new Artist(3, "Leonardo da Vinci","Leonardo","Da Vinci",1853,1890,"Leonardo da Vinci (Leonardo di ser Piero da Vinci) Loudspeaker.svg escuchar (Vinci, 15 de abril de 14522​-Amboise, 2 de mayo de 1519) fue un polímata florentino del Renacimiento italiano. Fue a la vez pintor, anatomista, arquitecto, paleontólogo,3​ botánico, escritor, escultor, filósofo, ingeniero, inventor, músico, poeta y urbanista.","https://en.wikipedia.org/wiki/Leonardo da Vinci");
 	}
 	
 	@Test

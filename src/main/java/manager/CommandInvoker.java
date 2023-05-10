@@ -8,7 +8,6 @@ import dao.User;
 
 public class CommandInvoker {
 
-    private static CommandInvoker instance;
     private final Map<CommandsType, Command> commands = new HashMap<>();
 
     private String artist_ActiveId=null;
@@ -16,7 +15,7 @@ public class CommandInvoker {
     private String museum_ActiveId=null;
     private static User user=null;
 
-    public CommandInvoker(User user) {
+    public CommandInvoker() {
         commands.put(CommandsType.ARTISTS, new GetAllArtistsCommand());
         commands.put(CommandsType.MUSEUM_GUIDE, new GetAllMuseumsCommand());
         commands.put(CommandsType.ART_GALERY, new GetAllArtworksCommand());
@@ -27,17 +26,6 @@ public class CommandInvoker {
         commands.put(CommandsType.REGISTER,new UserRegisterCommand(user));
         commands.put(CommandsType.MODIFY_USER,new UserModifyClass(user));
         commands.put(CommandsType.LOGOUT,new UserLogoutCommand());
-    }
-
-    public static CommandInvoker getInstance(User user){
-        if(instance==null){
-            instance=new CommandInvoker(user);
-        }
-        return instance;
-    }
-
-    public static void releaseInstance() {
-        CommandInvoker.instance = null;
     }
 
     public static User getUser() {

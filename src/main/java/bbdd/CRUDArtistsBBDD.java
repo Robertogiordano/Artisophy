@@ -12,7 +12,7 @@ import java.util.List;
 
 class CRUDArtistsBBDD implements DAOInterface {
     private static CRUDArtistsBBDD instance;
-    private static ConnectionManager connection;
+    private ConnectionManager connection;
 
     private CRUDArtistsBBDD(){
         connection=new ConnectionManager();
@@ -20,6 +20,7 @@ class CRUDArtistsBBDD implements DAOInterface {
     }
     public void closeConnection(){
         connection.closeConnection();
+        instance=null;
     }
     public static CRUDArtistsBBDD getInstance() {
         if(instance==null){
@@ -29,7 +30,7 @@ class CRUDArtistsBBDD implements DAOInterface {
     }
 
     private Artist getArtistElement(ResultSet rs) throws SQLException {
-        Artist artist = new Artist(rs.getInt("id"), rs.getString("name"), rs.getInt("birthYear"), rs.getInt("deathYear"), rs.getString("description"),rs.getString("wiki"));
+        Artist artist = new Artist(rs.getInt("id"), rs.getString("name_artist"), rs.getString("name"), rs.getString("surname"), rs.getInt("birthYear"), rs.getInt("deathYear"), rs.getString("description"),rs.getString("wiki"));
         return artist;
     }
 
@@ -43,13 +44,15 @@ class CRUDArtistsBBDD implements DAOInterface {
             throw new RuntimeException();
         }
 
-        String query = "INSERT INTO Artist (name, birthYear, deathYear, description, wiki) VALUES ( ?, ?, ?,?,?)";
+        String query = "INSERT INTO Artist (name_artist, name, surname, birthYear, deathYear, description, wiki) VALUES ( ?,?,?, ?, ?,?,?)";
         try (PreparedStatement stmt = connection.conn.prepareStatement(query)) {
-            stmt.setString(1, a.getName());
-            stmt.setInt(2, a.getBirthYear());
-            stmt.setInt(3, a.getDeathYear());
-            stmt.setString(4, a.getDescription());
-            stmt.setString(5, a.getWiki());
+            stmt.setString(1, a.getNameArtist());
+            stmt.setString(2, a.getName());
+            stmt.setString(3, a.getSurname());
+            stmt.setInt(4, a.getBirthYear());
+            stmt.setInt(5, a.getDeathYear());
+            stmt.setString(6, a.getDescription());
+            stmt.setString(7, a.getWiki());
 
             stmt.execute();
         } catch (Exception e) {
@@ -80,14 +83,16 @@ class CRUDArtistsBBDD implements DAOInterface {
             throw new RuntimeException();
         }
 
-        String query = "UPDATE Artist SET id=?, name=?, birthYear=?, deathYear=?, description=?, wiki=? WHERE "+condition;
+        String query = "UPDATE Artist SET id=?, name_artist=?, name=?, surname=?, birthYear=?, deathYear=?, description=?, wiki=? WHERE "+condition;
         try (PreparedStatement stmt = connection.conn.prepareStatement(query)) {
             stmt.setInt(1, a.getId());
-            stmt.setString(2, a.getName());
-            stmt.setInt(3, a.getBirthYear());
-            stmt.setInt(4, a.getDeathYear());
-            stmt.setString(5, a.getDescription());
-            stmt.setString(6, a.getWiki());
+            stmt.setString(2, a.getNameArtist());
+            stmt.setString(3, a.getName());
+            stmt.setString(4, a.getSurname());
+            stmt.setInt(5, a.getBirthYear());
+            stmt.setInt(6, a.getDeathYear());
+            stmt.setString(7, a.getDescription());
+            stmt.setString(8, a.getWiki());
 
             stmt.execute();
         } catch (Exception e) {
@@ -105,14 +110,10 @@ class CRUDArtistsBBDD implements DAOInterface {
             throw new RuntimeException();
         }
 
-        String query = "DELETE FROM Artist WHERE id=? and name=? and birthYear=? and deathYear=? and description=? and wiki=?";
+        String query = "DELETE FROM Artist WHERE id=? and name_artist=?";
         try (PreparedStatement stmt = connection.conn.prepareStatement(query)) {
             stmt.setInt(1, a.getId());
-            stmt.setString(2, a.getName());
-            stmt.setInt(3, a.getBirthYear());
-            stmt.setInt(4, a.getDeathYear());
-            stmt.setString(5, a.getDescription());
-            stmt.setString(6, a.getWiki());
+            stmt.setString(2, a.getNameArtist());
 
             stmt.execute();
         } catch (Exception e) {

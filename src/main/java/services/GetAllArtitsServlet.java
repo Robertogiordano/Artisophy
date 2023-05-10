@@ -2,6 +2,8 @@ package services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bbdd.ArtElementType;
+import bbdd.ConsultasBBDD;
+import dao.ArtElement;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,7 +25,7 @@ import manager.CommandsType;
 /**
  * Servlet implementation class GetAllArtitsServlet
  */
-@WebServlet("/GetAllArtitsServlet")
+@WebServlet("/GetAllArtistServlet")
 public class GetAllArtitsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,23 +46,32 @@ public class GetAllArtitsServlet extends HttpServlet {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			
-			User user = new User("Laura", "", "", "", "135246");
-		    CommandInvoker invoker = new CommandInvoker(user);
-		    CommandsType commandType = CommandsType.ARTISTS;
-		    List<Object> artists = invoker.executeCommand(commandType);
-		    
-		    JSONArray array = new JSONArray(artists);
-		    JSONObject out = new JSONObject();
-		    if(artists.isEmpty()) {
-		    	out.put("code", "ERROR");
-		    	out.put("mesaje", "Listado vacio");
-		    	out.put("resultado", array);
-		    } else {
-		    	out.put("code", "Ok");
-		    	out.put("mesaje", "Ok");
-		    	out.put("resultado", array);
-		    }
+
+			List<ArtElement> artElementsList= ConsultasBBDD.getArtElements(ArtElementType.ARTISTS);
+
+			JSONArray array = new JSONArray();
+			JSONObject out = new JSONObject();
+
+			if (!artElementsList.isEmpty()) {
+				Iterator var7 = artElementsList.iterator();
+
+				while(var7.hasNext()) {
+					Object a = var7.next();
+					JSONObject jsonAl = new JSONObject(a);
+					array.put(jsonAl);
+				}
+			}
+
+
+			if(array.isEmpty()) {
+				out.put("code", "ERROR");
+				out.put("message", "Listado vacio");
+				out.put("result", array);
+			} else {
+				out.put("code", "Ok");
+				out.put("message", "Ok");
+				out.put("result", array);
+			}
 		    
 		    PrintWriter writer = response.getWriter();
 		    try {
@@ -66,12 +80,21 @@ public class GetAllArtitsServlet extends HttpServlet {
 		    	writer.close();
 		    }
 		}catch(ClassNotFoundException e) {
-			PrintWriter out2 = response.getWriter();
-		    out2.println("SQL exception fired");
-		    out2.println(e.toString());
+			JSONObject out = new JSONObject();
+			out.put("code", "ERROR");
+			out.put("mensaje", "Class not found fired" + e.toString());
+			out.put("resultado", new JSONArray());
+			PrintWriter writer = response.getWriter();
+			try {
+				writer.write(out.toString());
+			} finally {
+				writer.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
-		    
-		
+
+
 	}
 	
 	/**

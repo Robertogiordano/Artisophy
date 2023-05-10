@@ -118,26 +118,33 @@ public class ConsultasBBDD {
     }
 
     public static User checkLogin(User user){
-        CRUDUserBBDD userBBDD=CRUDUserBBDD.getInstance();
         try {
-            userBBDD.read(user.getUsername(), user.getPassword());
+            CRUDUserBBDD userBBDD=CRUDUserBBDD.getInstance();
+            User responseUser=userBBDD.read(user.getUsername(), user.getPassword());
             userBBDD.closeConnection();
-            return user;
+            return responseUser;
         } catch (SQLException e) {
             return null;
         }
     }
 
-    public static void registerUserBBDD(User user){
+    public static Boolean registerUserBBDD(User user){
         CRUDUserBBDD userBBDD=CRUDUserBBDD.getInstance();
         userBBDD.create(user);
         userBBDD.closeConnection();
+        return true;
     }
 
-    public static User modifyUserBBDD(User oldUser,User newUser){
+    public static User modifyUserBBDD(User oldUser,User newUser) throws SQLException {
         CRUDUserBBDD userBBDD=CRUDUserBBDD.getInstance();
         userBBDD.update(newUser,"username='"+oldUser.getUsername()+"'");
         userBBDD.closeConnection();
-        return newUser;
+
+        userBBDD=CRUDUserBBDD.getInstance();
+        User user= userBBDD.read(newUser.getUsername(),newUser.getPassword());
+        userBBDD.closeConnection();
+
+        return user;
+
     }
 }

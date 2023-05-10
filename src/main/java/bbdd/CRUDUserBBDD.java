@@ -11,15 +11,16 @@ import java.util.List;
 class CRUDUserBBDD {
     private static CRUDUserBBDD instance;
 
-    private static ConnectionManager connection;
+    private ConnectionManager connection;
 
-    private CRUDUserBBDD(){
+    public CRUDUserBBDD(){
         connection=new ConnectionManager();
         connection.getConnection();
     }
 
     public void closeConnection(){
         connection.closeConnection();
+        instance=null;
     }
     public static CRUDUserBBDD getInstance() {
         if(instance==null){
@@ -59,9 +60,11 @@ class CRUDUserBBDD {
             }
         }
     }
-    public void update(User u, String condition) {
+    public void update(User u, String condition){
         String query = "UPDATE User SET name=?, surnames=?, username=?, email=?, password=? WHERE "+condition;
-        try (PreparedStatement stmt = connection.conn.prepareStatement(query)) {
+        try {
+            PreparedStatement stmt = connection.conn.prepareStatement(query);
+
             stmt.setString(1, u.getName());
             stmt.setString(2, u.getSurnames());
             stmt.setString(3, u.getUsername());
@@ -69,19 +72,17 @@ class CRUDUserBBDD {
             stmt.setString(5, u.getPassword());
 
             stmt.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
     public void delete(User u) {
 
-        String query = "DELETE FROM User WHERE name=? and surnames=? and username=? and email=? and password=?";
+        String query = "DELETE FROM User WHERE username=? and email=? and password=?";
         try (PreparedStatement stmt = connection.conn.prepareStatement(query)) {
-            stmt.setString(1, u.getName());
-            stmt.setString(2, u.getSurnames());
-            stmt.setString(3, u.getUsername());
-            stmt.setString(4, u.getEmail());
-            stmt.setString(5, u.getPassword());
+            stmt.setString(1, u.getUsername());
+            stmt.setString(2, u.getEmail());
+            stmt.setString(3, u.getPassword());
 
             stmt.execute();
         } catch (Exception e) {

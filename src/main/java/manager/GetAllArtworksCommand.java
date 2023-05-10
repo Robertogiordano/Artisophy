@@ -12,7 +12,7 @@ public class GetAllArtworksCommand implements Command {
         try {
             return Collections.singletonList(ConsultasBBDD.getArtElements(ArtElementType.ARTWORKS));
         } catch (SQLException e) {
-            throw new RuntimeException("Impossible get all artworks");
+            throw new RuntimeException("Impossible get all artworks. Error: "+e.toString());
         }
     }
 }

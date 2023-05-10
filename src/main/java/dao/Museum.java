@@ -2,7 +2,7 @@ package dao;
 
 import java.util.Objects;
 
-public class Museum implements ArtElement{
+public class Museum implements MuseumInterface {
     private Integer id;
     private String name;
     private String street;
@@ -38,82 +38,102 @@ public class Museum implements ArtElement{
         this.id = id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public String getStreet() {
         return street;
     }
 
+    @Override
     public void setStreet(String street) {
         this.street = street;
     }
 
+    @Override
     public String getOpeningHour() {
         return openingHour;
     }
 
+    @Override
     public void setOpeningHour(String openingHour) {
         this.openingHour = openingHour;
     }
 
+    @Override
     public String getClosingHour() {
         return closingHour;
     }
 
+    @Override
     public void setClosingHour(String closingHour) {
         this.closingHour = closingHour;
     }
 
+    @Override
     public String getPhone() {
         return phone;
     }
 
+    @Override
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public Double getPrice() {
         return price;
     }
 
+    @Override
     public void setPrice(Double price) {
         this.price = price;
     }
 
+    @Override
     public String getWebpageUrl() {
         return webpageUrl;
     }
 
+    @Override
     public void setWebpageUrl(String webpageUrl) {
         this.webpageUrl = webpageUrl;
     }
 
+    @Override
     public String getWiki() {
         return wiki;
     }
 
+    @Override
     public void setWiki(String wiki) {
         this.wiki = wiki;
     }
 
+    @Override
     public String getGoogleMaps() {
         return googleMaps;
     }
 
+    @Override
     public void setGoogleMaps(String googleMaps) {
         this.googleMaps = googleMaps;
     }

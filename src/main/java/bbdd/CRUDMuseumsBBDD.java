@@ -11,7 +11,7 @@ import java.util.*;
 class CRUDMuseumsBBDD implements DAOInterface {
     private static CRUDMuseumsBBDD instance;
 
-    private static ConnectionManager connection;
+    private ConnectionManager connection;
 
     private CRUDMuseumsBBDD(){
         connection=new ConnectionManager();
@@ -20,6 +20,7 @@ class CRUDMuseumsBBDD implements DAOInterface {
 
     public void closeConnection(){
         connection.closeConnection();
+        instance=null;
     }
     public static CRUDMuseumsBBDD getInstance() {
         if(instance==null){
@@ -115,19 +116,10 @@ class CRUDMuseumsBBDD implements DAOInterface {
             throw new RuntimeException();
         }
 
-        String query = "DELETE FROM Museum WHERE id=? and name=? and street=? and openingHour=? and closingHour=? and phone=? and description=? and price=? and webpageUrl=? and wiki=? and googleMaps=?";
+        String query = "DELETE FROM Museum WHERE id=? and name=?";
         try (PreparedStatement stmt = connection.conn.prepareStatement(query)) {
             stmt.setInt(1, m.getId());
             stmt.setString(2, m.getName());
-            stmt.setString(3, m.getStreet());
-            stmt.setString(4, m.getOpeningHour());
-            stmt.setString(5, m.getClosingHour());
-            stmt.setString(6, m.getPhone());
-            stmt.setString(7, m.getDescription());
-            stmt.setDouble(8, m.getPrice());
-            stmt.setString(9, m.getWebpageUrl());
-            stmt.setString(10, m.getWiki());
-            stmt.setString(11, m.getGoogleMaps());
 
             stmt.execute();
         } catch (Exception e) {

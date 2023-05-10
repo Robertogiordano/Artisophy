@@ -36,8 +36,8 @@ class TestConnectionDB {
 
 	   @Test
 	    public void insertArtistTest(){
-	       Artist picasso=new Artist(0,"Pablo Picasso",1881,1973,"Pablo Ruiz y Picasso, simply known as Pablo Picasso, was a Spanish painter, sculptor and lithographer, among the most influential of the 20th century","https://en.wikipedia.org/wiki/Pablo_Picasso");
-	       Artist dali=new Artist(1,"Salvador Dalí",1904,1989,"Salvador Dalí, Marquis of Pùbol, born Salvador Domingo Felipe Jacinto Dalí i Domènech, was a Spanish painter, sculptor, writer, photographer, filmmaker, designer, screenwriter and mystic","https://en.wikipedia.org/wiki/Salvador_Dal%C3%AD");
+	       Artist picasso=new Artist(0,"Pablo Picasso","Pablo","Picasso",1881,1973,"Pablo Ruiz y Picasso, simply known as Pablo Picasso, was a Spanish painter, sculptor and lithographer, among the most influential of the 20th century","https://en.wikipedia.org/wiki/Pablo_Picasso");
+	       Artist dali=new Artist(1,"Salvador Dalí","Salvador","Dalì",1904,1989,"Salvador Dalí, Marquis of Pùbol, born Salvador Domingo Felipe Jacinto Dalí i Domènech, was a Spanish painter, sculptor, writer, photographer, filmmaker, designer, screenwriter and mystic","https://en.wikipedia.org/wiki/Salvador_Dal%C3%AD");
 
 	       CRUDArtistsBBDD artistBBDD=CRUDArtistsBBDD.getInstance();
 	       artistBBDD.create(picasso);
@@ -46,8 +46,8 @@ class TestConnectionDB {
 
 	   @Test
 	    public void updateArtistTest(){
-	        Artist picasso=new Artist(0,"Pablo Picasso",1881,1973,"Pablo Ruiz y Picasso, simply known as Pablo Picasso, was a Spanish painter, sculptor and lithographer, among the most influential of the 20th century","https://en.wikipedia.org/wiki/Pablo_Picasso");
-	        Artist dali=new Artist(1,"Salvador Dalí",1904,1989,"Salvador Dalí, Marquis of Pùbol, born Salvador Domingo Felipe Jacinto Dalí i Domènech, was a Spanish painter, sculptor, writer, photographer, filmmaker, designer, screenwriter and mystic","https://en.wikipedia.org/wiki/Salvador_Dal%C3%AD");
+	        Artist picasso=new Artist(0,"Pablo Picasso","Pablo","Picasso",1881,1973,"Pablo Ruiz y Picasso, simply known as Pablo Picasso, was a Spanish painter, sculptor and lithographer, among the most influential of the 20th century","https://en.wikipedia.org/wiki/Pablo_Picasso");
+	        Artist dali=new Artist(1,"Salvador Dalí","Salvador","Dali",1904,1989,"Salvador Dalí, Marquis of Pùbol, born Salvador Domingo Felipe Jacinto Dalí i Domènech, was a Spanish painter, sculptor, writer, photographer, filmmaker, designer, screenwriter and mystic","https://en.wikipedia.org/wiki/Salvador_Dal%C3%AD");
 
 	        CRUDArtistsBBDD artistBBDD=CRUDArtistsBBDD.getInstance();
 	        artistBBDD.update(picasso,"name='"+picasso.getName()+"'");

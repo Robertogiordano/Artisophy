@@ -13,7 +13,7 @@ class ConsultaUserBBDD {
 	User user;
 	
 	@BeforeEach
-	public void inicializate() {
+	public void initialize() {
 		user=new User("Roberto","Giordano", "rgiordano","rgiordano@al.uloyola.es","qwertyuiop");
 	}
 	
@@ -27,6 +27,14 @@ class ConsultaUserBBDD {
     public void readAllUsersTest() throws SQLException {
         CRUDUserBBDD userBBDD=CRUDUserBBDD.getInstance();
         System.out.println(userBBDD.readAll());
+    }
+
+    @Test
+    public void checkLoginTest() throws SQLException{
+        User rg=new User("rgiordano","qwertyuiop");
+        User user=ConsultasBBDD.checkLogin(rg);
+        Assert.assertEquals(rg.getUsername(),user.getUsername());
+        Assert.assertEquals(rg.getPassword(),user.getPassword());
     }
 
 }

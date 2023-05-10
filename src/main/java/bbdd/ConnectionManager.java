@@ -3,7 +3,7 @@ package bbdd;
 import java.sql.*;
 
 class ConnectionManager {
-    public Connection conn;
+    public Connection conn=null;
     private final String URL = "jdbc:mysql://localhost:3306/artysophy";
     private final String USER = "root";
     private final String PASSWORD = "";
@@ -19,9 +19,10 @@ class ConnectionManager {
         return conn;
     }
 
-    public void closeConnection() {
+    public Connection closeConnection() {
         try {
             conn.close();
+            return conn;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

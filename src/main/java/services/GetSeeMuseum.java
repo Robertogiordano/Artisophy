@@ -1,7 +1,10 @@
+/*NEVER INVOCATED*/
+
 package services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -40,11 +43,10 @@ public class GetSeeMuseum extends HttpServlet {
     	try {
     		Class.forName("com.mysql.cj.jdbc.Driver");
  			
- 			User user = new User("Laura", "", "", "", "135246");
- 			
+
  			String id = request.getParameter("id");
  			
-		    CommandInvoker invoker = new CommandInvoker(user);
+		    CommandInvoker invoker = new CommandInvoker();
 		    invoker.setMuseum_ActiveId(id);
 		    CommandsType commandType = CommandsType.SEE_MUSEUM;
 		    List<Object> museums = invoker.executeCommand(commandType);
@@ -67,12 +69,19 @@ public class GetSeeMuseum extends HttpServlet {
 		    } finally {
 		    	writer.close();
 		    }
-	        
-    	 }catch(ClassNotFoundException e) {
- 			PrintWriter out2 = response.getWriter();
- 		    out2.println("SQL exception fired");
- 		    out2.println(e.toString());
- 		}
+
+		}catch(ClassNotFoundException e) {
+			JSONObject out = new JSONObject();
+			out.put("code", "ERROR");
+			out.put("mensaje", "Class not found fired" + e.toString());
+			out.put("resultado", new JSONArray());
+			PrintWriter writer = response.getWriter();
+			try {
+				writer.write(out.toString());
+			} finally {
+				writer.close();
+			}
+		}
     }
     
 	/**
